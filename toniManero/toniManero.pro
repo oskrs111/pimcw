@@ -18,7 +18,14 @@ DEFINES += VEJAM_NO_GUI
 
 linux
 {
-#    DEFINES += USE_I2C_BUS
+#this is the configuration need to compile for raspberry pi B+
+    CONFIG += static
+    DEFINES += USE_I2C_BUS
+    LIBS += -lqeglfs -L/mnt/rasp-pi-rootfs/usr/local/QtPi5.4.2/plugins/platforms/
+    LIBS += -lqico -L/mnt/rasp-pi-rootfs/usr/local/QtPi5.4.2/plugins/imageformats/
+    LIBS += -lqconnmanbearer -L/mnt/rasp-pi-rootfs/usr/local/QtPi5.4.2/plugins/bearer/
+    LIBS += -lqgenericbearer -L/mnt/rasp-pi-rootfs/usr/local/QtPi5.4.2/plugins/bearer/
+    LIBS += -lqnmbearer -L/mnt/rasp-pi-rootfs/usr/local/QtPi5.4.2/plugins/bearer/
 }
 
 SOURCES += main.cpp \

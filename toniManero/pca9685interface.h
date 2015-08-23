@@ -14,6 +14,11 @@
 #define LED0_OFF_L  0x08
 #define LED0_OFF_H  0x09
 
+#define LED_ALL_ON_L  0xFA
+#define LED_ALL_ON_H  0xFB
+#define LED_ALL_OFF_L  0xFC
+#define LED_ALL_OFF_H  0xFD
+
 class pca9685Interface : public QObject
 {
     Q_OBJECT

@@ -56,13 +56,17 @@ int main(int argc, char *argv[])
 
     //http://stackoverflow.com/questions/19375141/udp-packet-is-not-received-in-qthread
 
-    pca9685Interface interface(g_appParameters->loadParam(QString("network"),
-                                                          QString("udpPort"),0).toInt());
+    pca9685Interface interface((quint16)g_appParameters->loadParam(QString("network"),QString("udpPort"),0).toInt(),
+                               (quint8)g_appParameters->loadParam(QString("i2c"),QString("i2cBus"),0).toInt(),
+                               (quint8)g_appParameters->loadParam(QString("i2c"),QString("i2cAddr"),0).toInt(),
+                               (quint8)g_appParameters->loadParam(QString("midi"),QString("noteOffset"),0).toInt());
+
+
     qDebug() << "toniManero is dancing now!";
 
     while(1)
     {
-        interface.OnReadyRead();
+        interface.socketPoll();
         QThread::usleep(1);
     }
     return a.exec();
@@ -71,6 +75,8 @@ int main(int argc, char *argv[])
 void setDefaultParameters()
 {
     g_appParameters->saveParam(QString("app"),QString("fileLog"),QString("0"));    
+    g_appParameters->saveParam(QString("i2c"),QString("i2cBus"),QString("1"));
+    g_appParameters->saveParam(QString("i2c"),QString("i2cAddr"),QString("64"));
     g_appParameters->saveParam(QString("network"),QString("udpPort"),QString("12340"));
     g_appParameters->saveParam(QString("midi"),QString("noteOffset"),QString("0"));
     g_appParameters->fileSave();
