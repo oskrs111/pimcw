@@ -148,6 +148,7 @@ void pca9685Interface::midi2pwm(struct midiMessage* message)
 
 void pca9685Interface::socketPoll()
 {
+    static quint8 index = 128; //Do not init to 0x00!!!
     QByteArray data;
     QHostAddress sender;
     quint16 senderPort;
@@ -174,12 +175,12 @@ void pca9685Interface::socketPoll()
             t += sizeof(struct midiMessage);
             p += sizeof(struct midiMessage);
 
-            if((message.m_status == MM_NOTE_ON) || (message.m_status == MM_NOTE_OFF))
+            if(((message.m_status == MM_NOTE_ON) || (message.m_status == MM_NOTE_OFF)) && (index != message.align__))
             {
                 this->midi2pwm(&message);
-            }
-
-            qDebug() << this->midiMessageToStr(&message);
+                index = message.align__;
+                qDebug() << this->midiMessageToStr(&message);
+            }            
         }
     }
 }

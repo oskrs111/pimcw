@@ -14,6 +14,9 @@ CONFIG   -= app_bundle
 
 TEMPLATE = app
 
+target.path = /opt
+INSTALLS += target
+
 DEFINES += VEJAM_NO_GUI
 
 linux
@@ -30,11 +33,28 @@ linux
 
 SOURCES += main.cpp \
     ../qtkApplicationParameters/qtkapplicationparameters.cpp \        
-    pca9685interface.cpp
+    pca9685interface.cpp \
+    ../qtkHttpServer/qtkHttpServer.cpp \
+    ../qtkHttpServer/qtkJsRpcServer.cpp \
+    ../qtkHttpServer/qtkMjpgStreamer.cpp \
+    ../qtkHttpServer/qtkRtpCommand_.cpp
 
 HEADERS += main.h \        
     ../qtkApplicationParameters/qtkapplicationparameters.h \        
     ../qtkVirtualMIDI/qtkvirtualmidistructs.h \
-    pca9685interface.h
+    pca9685interface.h \
+    ../qtkHttpServer/qtkHttpCommon.h \
+    ../qtkHttpServer/qtkHttpServer.h \
+    ../qtkHttpServer/qtkJsRpcServer.h \
+    ../qtkHttpServer/qtkMjpgStreamer.h \
+    ../qtkHttpServer/qtkRtpCommand_.h \
+    ../rpc/qtkHttpServerConfig.h \
+    ../rpc/qtkRtpCommand_headers.h \
+    ../rpc/qtkRtpCommand_id.h \
+    ../rpc/qtkRtpCommand_PwmSet.h \
+    ../rpc/qtkRtpCommandsInit.h \
+    ../rpc/qtkRtpCommand_Test.h
 
-INCLUDEPATH += "../qtkApplicationParameters"
+INCLUDEPATH += "../qtkApplicationParameters" \
+               "../qtkHttpServer" \
+                "../config"

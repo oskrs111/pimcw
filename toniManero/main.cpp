@@ -1,6 +1,7 @@
 #include <QThread>
 #include "main.h"
 #include "pca9685interface.h"
+#include "qtkHttpServer.h"
 
 void debugLogger(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
@@ -39,17 +40,17 @@ int main(int argc, char *argv[])
     QCoreApplication a(argc, argv);
     qDebug() << "toniManero starting...";
 
-    g_appParameters = new QtKApplicationParameters(0,QString("discoFever"));
+    g_appParameters = new QtKApplicationParameters(0,QString("toniManero"));
 
     if(g_appParameters->fileLoad(false))
     {
             setDefaultParameters();
-            QString msg = "discoFever.cfg not found!\r\nSetting default configuration.";
+            QString msg = "toniManero.cfg not found!\r\nSetting default configuration.";
             qDebug() << msg;
             a.exit();
     }
 
-    if(!g_appParameters->loadParam(QString("aplicacion"),QString("fileLog"),0).compare("1"))
+    if(!g_appParameters->loadParam(QString("app"),QString("fileLog"),0).compare("1"))
     {
         qInstallMessageHandler(debugLogger);
     }
@@ -62,7 +63,9 @@ int main(int argc, char *argv[])
                                (quint8)g_appParameters->loadParam(QString("midi"),QString("noteOffset"),0).toInt());
 
 
-    qDebug() << "toniManero is dancing now!";
+    QtkHttpServer server((quint16)g_appParameters->loadParam(QString("network"),QString("httpPort"),0).toInt());
+
+    qDebug() << "toniManero (0.1) is dancing now!";
 
     while(1)
     {
@@ -78,6 +81,7 @@ void setDefaultParameters()
     g_appParameters->saveParam(QString("i2c"),QString("i2cBus"),QString("1"));
     g_appParameters->saveParam(QString("i2c"),QString("i2cAddr"),QString("64"));
     g_appParameters->saveParam(QString("network"),QString("udpPort"),QString("12340"));
+    g_appParameters->saveParam(QString("network"),QString("httpPort"),QString("80"));
     g_appParameters->saveParam(QString("midi"),QString("noteOffset"),QString("0"));
     g_appParameters->fileSave();
 }
