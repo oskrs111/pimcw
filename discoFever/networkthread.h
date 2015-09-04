@@ -6,14 +6,15 @@
 #include "../qtkVirtualMIDI/qtkvirtualmidi.h"
 #include "../qtkVirtualMIDI/qtkvirtualmidistructs.h"
 
-class networkThread : public QThread
+#define MESSAGE_FIFO_SIZE 128
+
+class networkThread : public QObject
 {
     Q_OBJECT
 
 public:
-    networkThread(QHostAddress hostIp, quint16 udpPort);
-    ~networkThread();
-    void run();
+    networkThread(QHostAddress hostIp, quint16 udpPort, QObject *parent = 0);
+    ~networkThread();    
 
 private:
     QHostAddress m_hostIp;

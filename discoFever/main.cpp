@@ -62,8 +62,7 @@ int main(int argc, char *argv[])
     switch(midi.getStatus())
     {
         case stReady:
-            QObject::connect(&midi,SIGNAL(midiReceived(midiMessage)),&network, SLOT(OnMidiReceived(midiMessage)));
-            network.start();
+            QObject::connect(&midi,SIGNAL(midiReceived(midiMessage)),&network, SLOT(OnMidiReceived(midiMessage)));            
             qDebug() << "discoFever is ready to dance!";
             return a.exec();
             break;

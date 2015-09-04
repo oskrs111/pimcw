@@ -1,11 +1,18 @@
 #include "networkthread.h"
 #include <QDebug>
 
-networkThread::networkThread(QHostAddress hostIp, quint16 udpPort)
+networkThread::networkThread(QHostAddress hostIp, quint16 udpPort, QObject *parent) : QObject(parent)
 {
     this->m_hostIp = hostIp;
     this->m_udpPort = udpPort;
     this->p_socket = 0;
+
+    if(this->m_hostIp.isNull() == false)
+    {
+        qDebug() << "networkThread ip host: " << this->m_hostIp;
+        qDebug() << "networkThread udp port: " << this->m_udpPort;
+        this->p_socket = new QUdpSocket(this);
+    }
 }
 
 networkThread::~networkThread()
@@ -13,18 +20,6 @@ networkThread::~networkThread()
     if(this->p_socket)
     {
         this->p_socket->deleteLater();
-    }
-}
-
-void networkThread::run()
-{
-    qDebug() << "networkThread id: " << currentThreadId();
-    if(this->m_hostIp.isNull() == false)
-    {
-        qDebug() << "networkThread ip host: " << this->m_hostIp;
-        qDebug() << "networkThread udp port: " << this->m_udpPort;
-        this->p_socket = new QUdpSocket();
-        this->exec();
     }
 }
 
