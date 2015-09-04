@@ -35,6 +35,8 @@ private:
     void i2cByteWrite(quint8 reg, quint8 value);
     void midi2pwm(struct midiMessage* message);
 
+    bool event(QEvent *event);
+
     char* midiMessageToStr(struct midiMessage* message);
     quint16 m_udpPort;
     quint8 m_i2cBus;
@@ -51,6 +53,7 @@ private:
 signals:
 
 public slots:    
+    void OnReadyRead();
 };
 
 #endif // PCA9685INTERFACE_H

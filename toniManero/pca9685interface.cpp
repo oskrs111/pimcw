@@ -5,8 +5,10 @@
 #ifdef USE_I2C_BUS
 extern "C"
 {
+#ifdef USE_LINUX_PLATFORM
 #include <linux/i2c-dev.h>
 #include <sys/ioctl.h>
+#endif
 #include <fcntl.h>
 #include <unistd.h>
 #include <stdio.h>
@@ -15,6 +17,8 @@ extern "C"
 }
 #endif
 
+#define PCA9685_INTERFACE_SERVICE_NAME "PWM_SERVICE"
+
 pca9685Interface::pca9685Interface(quint16 udpPort, quint8 i2cBus, quint8 i2cAddr, quint8 noteOffset, QObject *parent) : QObject(parent)
 {
     this->m_udpPort = udpPort;
@@ -22,6 +26,8 @@ pca9685Interface::pca9685Interface(quint16 udpPort, quint8 i2cBus, quint8 i2cAdd
     this->m_i2cAddr = i2cAddr;
     this->m_noteOffset = noteOffset;
     this->m_i2cHandler = 0;
+
+    this->setObjectName(QString(PCA9685_INTERFACE_SERVICE_NAME));
 
     this->networkInit();
     if(this->i2cInit() == 0)
@@ -39,6 +45,7 @@ void pca9685Interface::networkInit()
 {
     this->p_socket = new QUdpSocket(this);
     this->p_socket->bind(QHostAddress::Any, this->m_udpPort);
+    connect(this->p_socket,SIGNAL(readyRead()),this,SLOT(OnReadyRead()));
     qDebug() << "pca9685Interface listening on udp port: " << this->m_udpPort;
 }
 
@@ -185,16 +192,21 @@ void pca9685Interface::socketPoll()
     }
 }
 
+void pca9685Interface::OnReadyRead()
+{
+    this->socketPoll();
+}
+
 char* pca9685Interface::midiMessageToStr(struct midiMessage* message)
 {
     static long int last_time = 0;
     static long int time_difference = 0;
     static struct timespec gettime_now;
-
+#ifdef USE_LINUX_PLATFORM
     clock_gettime(CLOCK_REALTIME, &gettime_now);
     time_difference = (abs(gettime_now.tv_nsec - last_time) / 1000);
     last_time = gettime_now.tv_nsec;
-
+#endif
     static char dumpBuffer[1024];            
 
     sprintf(dumpBuffer, "%s, Ch=%02d, D1=%03d, D2=%03d, delay=%d us",
@@ -210,4 +222,7 @@ char* pca9685Interface::midiMessageToStr(struct midiMessage* message)
     return dumpBuffer;
 }
 
-
+bool pca9685Interface::event(QEvent *event)
+{
+    qDebug() << "pca9685Interface::event " << event;
+}

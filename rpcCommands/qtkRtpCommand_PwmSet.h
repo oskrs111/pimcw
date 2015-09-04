@@ -2,11 +2,12 @@
 #define QTKRTPCOMMAND_PWMSET__H
 #include <QObject>
 #include <QEvent>
+#include <QCoreApplication>
 #include "qtkRtpCommand_id.h"
 #include "qtkRtpCommand_.h"
 
 //http://stackoverflow.com/questions/6061352/creating-a-custom-message-event-with-qt
-const QEvent::Type PWM_EVENT = static_cast<QEvent::Type>(QEvent::User + rci_PwmSetCommand);
+const QEvent::Type PWM_EVENT = static_cast<QEvent::Type>(QEvent::User + k_rtp_command_id::rci_PwmSetCommand);
 
 // Define your custom event subclass
 class PwmEvent : public QEvent
@@ -60,12 +61,17 @@ inline void qtkRtpCommand_PwmSet::CommandExecute(QJsonObject params)
 {
     int channel = 0;
     int dutty = 0;
-    PwmEvent* event;
+    PwmEvent* event = 0;
+    QObject* target = 0;
+    QtkJsRpcServer* parent = 0;
 
 	event = new PwmEvent(channel, dutty);
-	QApplication::postEvent(this, event); 
+    parent = (QtkJsRpcServer*)this->parent();
+    target = parent->getEventTarget("PWM_SERVICE");
+
+    QCoreApplication::postEvent(target, event);
 	
-    QString result = QString("{'jsonrpc': '2.0', 'result': %1, 'id': 1}").arg(sum,0,10);
+    QString result = QString("{'jsonrpc': '2.0', 'result': 'success', 'id': 1}");
     result = result.replace('\'', '"');
     emit commandDone(this->GetCommandId(), result.toLatin1());
 }

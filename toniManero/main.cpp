@@ -60,18 +60,20 @@ int main(int argc, char *argv[])
     pca9685Interface interface((quint16)g_appParameters->loadParam(QString("network"),QString("udpPort"),0).toInt(),
                                (quint8)g_appParameters->loadParam(QString("i2c"),QString("i2cBus"),0).toInt(),
                                (quint8)g_appParameters->loadParam(QString("i2c"),QString("i2cAddr"),0).toInt(),
-                               (quint8)g_appParameters->loadParam(QString("midi"),QString("noteOffset"),0).toInt());
+                               (quint8)g_appParameters->loadParam(QString("midi"),QString("noteOffset"),0).toInt(),
+                               &a);
 
 
-    QtkHttpServer server((quint16)g_appParameters->loadParam(QString("network"),QString("httpPort"),0).toInt());
+    QtkHttpServer server((quint16)g_appParameters->loadParam(QString("network"),QString("httpPort"),0).toInt(), &a);
 
     qDebug() << "toniManero (0.1) is dancing now!";
 
-    while(1)
-    {
-        interface.socketPoll();
-        QThread::usleep(1);
-    }
+    //while(1)
+    //{
+    //    interface.socketPoll();
+    //    QThread::usleep(1);
+    //}
+
     return a.exec();
 }
 

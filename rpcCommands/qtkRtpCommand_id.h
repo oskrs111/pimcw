@@ -3,11 +3,13 @@
 //OSLL: Define here the id's for your RPC commands as well it's text names, or 'alias'. 
 //--> {"jsonrpc": "2.0", "method": "subtract", "params": {"subtrahend": 23, "minuend": 42}, "id": 3}
 //<-- {"jsonrpc": "2.0", "result": 19, "id": 3}
+
+#define RCI_BASE 100
 namespace k_rtp_command_id
 {
 	enum 
-	{
-		rci_TestCommand = 100,
+	{		
+        rci_TestCommand = RCI_BASE,
 		rci_PwmSetCommand,
 		rci_Last	
 	};
@@ -21,7 +23,8 @@ struct rtpCommandStruct
 
 static struct rtpCommandStruct rtpCommands [] =
 {
-{"test", rci_TestCommand}
+{"test", rci_TestCommand},
+{"pwmSet", rci_PwmSetCommand}
 };
 
 
