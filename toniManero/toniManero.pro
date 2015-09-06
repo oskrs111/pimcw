@@ -33,6 +33,7 @@ unix {
 }
 
 win32 {
+DEFINES += USE_WINDOWS_PLATFORM
 RC_ICONS += toniManero.ico
 }
 
@@ -71,3 +72,6 @@ INCLUDEPATH += "../qtkApplicationParameters" \
                "../qtkHttpServer" \
                "../config" \
                "../rpcCommands"
+
+RESOURCES += \
+    tonimanero.qrc

@@ -39,7 +39,6 @@ int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
     qDebug() << "toniManero starting...";
-
     g_appParameters = new QtKApplicationParameters(0,QString("toniManero"));
 
     if(g_appParameters->fileLoad(false))
