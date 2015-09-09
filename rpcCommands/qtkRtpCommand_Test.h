@@ -14,7 +14,7 @@ public:
 
 private:
     void CommandInit();
-    void CommandExecute(QJsonObject params);
+    void CommandExecute(QJsonObject params, int seqId);
 };
 
 inline qtkRtpCommand_Test::qtkRtpCommand_Test(QtkJsRpcServer *parent)
@@ -28,11 +28,9 @@ inline void qtkRtpCommand_Test::CommandInit()
         this->SetCommandId(k_rtp_command_id::rci_TestCommand);
 }
 
-inline void qtkRtpCommand_Test::CommandExecute(QJsonObject params)
-{
-    int sum = 69;
-    QString result = QString("{'jsonrpc': '2.0', 'result': %1, 'id': 1}").arg(sum,0,10);
-    result = result.replace('\'', '"');
+inline void qtkRtpCommand_Test::CommandExecute(QJsonObject params, int seqId)
+{    
+    QString result = QString("{\"jsonrpc\": \"2.0\", \"result\": \"success\", \"id\": %1}").arg(seqId,0,10);
     emit commandDone(this->GetCommandId(), result.toLatin1());
 }
 

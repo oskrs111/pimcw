@@ -1,6 +1,8 @@
-#include "pca9685interface.h"
 #include <QDebug>
 #include <QThread>
+#include "pca9685interface.h"
+#include "pca9685events.h"
+
 
 #ifdef USE_I2C_BUS
 extern "C"
@@ -46,7 +48,7 @@ void pca9685Interface::networkInit()
     this->p_socket = new QUdpSocket(this);
     this->p_socket->bind(QHostAddress::Any, this->m_udpPort);
     connect(this->p_socket,SIGNAL(readyRead()),this,SLOT(OnReadyRead()));
-    qDebug() << "pca9685Interface listening on udp port: " << this->m_udpPort;
+    qDebug() << "[pca9685Interface] listening on udp port: " << this->m_udpPort;
 }
 
 int pca9685Interface::i2cInit()
@@ -59,17 +61,17 @@ int pca9685Interface::i2cInit()
     this->m_i2cHandler = open(deviceName, O_RDWR | O_NONBLOCK);
     if(this->m_i2cHandler < 0)
     {
-        qDebug() << "pca9685Interface::i2cInit, error opening device: " << deviceName  << " errno: " << errno;
+        qDebug() << "[pca9685Interface] i2cInit, error opening device: " << deviceName  << " errno: " << errno;
         return errno;
     }
 
     if(ioctl(this->m_i2cHandler, I2C_SLAVE, this->m_i2cAddr) < 0)
     {
-        qDebug() << "pca9685Interface::i2cInit, error setting i2c address: " << this->m_i2cAddr << " errno: " << errno;
+        qDebug() << "[pca9685Interface] i2cInit, error setting i2c address: " << this->m_i2cAddr << " errno: " << errno;
         return errno;
     }
 
-    qDebug() << "pca9685Interface::i2cInit succesfull for device address: " << this->m_i2cAddr;
+    qDebug() << "[pca9685Interface] i2cInit succesfull for device address: " << this->m_i2cAddr;
 
 #endif
     return 0;
@@ -86,7 +88,7 @@ void pca9685Interface::i2cByteWrite(quint8 reg, quint8 value)
 
     if (write(this->m_i2cHandler, buf, 2) != 2)
     {
-        qDebug() << "pca9685Interface::i2cWrite, error i2c write reg: " << reg << " errno: " << errno;
+        qDebug() << "[pca9685Interface] i2cWrite, error i2c write reg: " << reg << " errno: " << errno;
     }
     else
     {
@@ -153,6 +155,26 @@ void pca9685Interface::midi2pwm(struct midiMessage* message)
 
 }
 
+void pca9685Interface::event2pwm(unsigned char channel, unsigned char dutty)
+{
+    quint8 chanDutyH = 0;
+    quint8 chanDutyL = 0;
+    quint16 dutyW = 0;
+  
+	if(dutty > 100) dutty = 100; //OSLL: Here are working with 0% to 100% range!
+
+
+    dutyW = (40 * dutty);
+    chanDutyL = (quint8)(dutyW & 0x00FF) ;
+    chanDutyH = (quint8)(dutyW >> 8) & 0x0F;
+
+    //this->i2cByteWrite(LED0_ON_L + chanOffset, 0x00);
+    //this->i2cByteWrite(LED0_ON_H + chanOffset, 0x00);
+    this->i2cByteWrite(LED0_OFF_L + channel, chanDutyL);
+    this->i2cByteWrite(LED0_OFF_H + channel, chanDutyH);
+
+}
+
 void pca9685Interface::socketPoll()
 {
     static quint8 index = 128; //Do not init to 0x00!!!
@@ -201,8 +223,8 @@ char* pca9685Interface::midiMessageToStr(struct midiMessage* message)
 {
     static long int last_time = 0;
     static long int time_difference = 0;
-    static struct timespec gettime_now;
 #ifdef USE_LINUX_PLATFORM
+    static struct timespec gettime_now;
     clock_gettime(CLOCK_REALTIME, &gettime_now);
     time_difference = (abs(gettime_now.tv_nsec - last_time) / 1000);
     last_time = gettime_now.tv_nsec;
@@ -224,5 +246,12 @@ char* pca9685Interface::midiMessageToStr(struct midiMessage* message)
 
 bool pca9685Interface::event(QEvent *event)
 {
-    qDebug() << "pca9685Interface::event " << event;
+    if (event->type() == PWM_EVENT)
+    {
+        PwmEvent *myEvent = static_cast<PwmEvent *>(event);
+        this->pca9685Interface::event2pwm((unsigned char)myEvent->getChannel(), (unsigned char)myEvent->getDutty());
+		qDebug() << "[pca9685Interface] PwmEvent, Channel: " << myEvent->getChannel() << " Dutty: " << myEvent->getDutty();		
+        return true;
+    }
+    return QObject::event(event);
 }

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, user-scalable=no">
+  <link href="css/jquery.mobile-1.4.5.css" rel="stylesheet" type="text/css" />
+  <script src="js/jquery-1.11.3.js"></script>
+  <script src="js/jquery.mobile-1.4.5.js"></script>
+  <script src="js/app.js"></script>
+  <!-- Uncomment the following to include cordova in your android project -->
+  <!--<script src="http://jqmdesigner.appspot.com/platforms/android/cordova.js"></script>-->
+  <title>EZo App</title>
+</head>
+
+<body>
+    <div style="max-width: 348px;">
+  <div id="home" data-role="page">
+    <div data-role="header" data-position="fixed">
+      <h3>Toni Manero Control</h3>
+      <div class="ui-grid-b" style="height:55px">
+          <div class="ui-block-a" style="height:100%">
+          <div id='appIcon' style='width: 32px; height: 32px; background-image: \css\images\toniManero.ico ;'></div>
+          </div>
+        <div class="ui-block-b" style="height:100%">
+          <div class="ui-field-contain">
+            <label for="gk-95S2XR" class="ui-hidden-accessible"></label>
+            <input type="checkbox" data-role="flipswitch" id="gk-95S2XR">
+          </div>
+        </div>
+        <div class="ui-block-c" style="height:100%"></div>
+      </div>
+    </div>
+    <div role="main" class="ui-content">
+        
+      <div data-role="collapsibleset">
+        <div data-role="collapsible" data-collapsed="true">
+          <h3>Target Settings</h3>
+          <div class="ui-field-contain">
+            <label for="gk-95xBSC">Ip Address</label>
+            <input type="text" name id="gk-95xBSC" placeholder="192.168.XXX.XXX">
+          </div>
+          <div class="ui-field-contain">
+            <label for="gk-95ZWsa">Ip Port</label>
+            <input type="number" name id="gk-95ZWsa" value="80">
+          </div>
+        </div>
+      </div>
+        
+      <div data-role="collapsibleset">
+        <div data-role="collapsible" data-collapsed="true">
+          <h3>Channels Settings</h3>
+          
+          <div class="ui-field-contain">
+            <label for="gk-95ycRH">Channel 01</label>
+            <input id="gk-95ycRH" value="50" min="0" max="100" type="range">
+          </div>
+          
+          <div class="ui-field-contain">
+            <label for="gk-957Fqz">Channel 02</label>
+            <input id="gk-957Fqz" value="50" min="0" max="100" type="range">
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+
+</html>

@@ -65,7 +65,8 @@ HEADERS += main.h \
     ../rpcCommands/qtkRtpCommand_id.h \
     ../rcpCommands/qtkRtpCommand_PwmSet.h \
     ../rpcCommands/qtkRtpCommand_Test.h \
-    ../rpcCommands/qtkRtpCommandsInit.h
+    ../rpcCommands/qtkRtpCommandsInit.h \
+    pca9685events.h
 
 
 INCLUDEPATH += "../qtkApplicationParameters" \
