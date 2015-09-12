@@ -34,7 +34,7 @@ private:
 
     void i2cByteWrite(quint8 reg, quint8 value);
     void midi2pwm(struct midiMessage* message);
-	void pca9685Interface::event2pwm(unsigned char channel, unsigned char dutty);
+    void event2pwm(unsigned char channel, unsigned char dutty);
 
     bool event(QEvent *event);
 

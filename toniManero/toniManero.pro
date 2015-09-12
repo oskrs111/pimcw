@@ -60,12 +60,7 @@ HEADERS += main.h \
     ../rpcCommands/qtkRtpCommand_id.h \
     ../rpcCommands/qtkRtpCommand_PwmSet.h \
     ../rpcCommands/qtkRtpCommandsInit.h \
-    ../rpcCommands/qtkRtpCommand_Test.h \
-    ../rpcCommands/qtkRtpCommand_headers.h \
-    ../rpcCommands/qtkRtpCommand_id.h \
-    ../rcpCommands/qtkRtpCommand_PwmSet.h \
-    ../rpcCommands/qtkRtpCommand_Test.h \
-    ../rpcCommands/qtkRtpCommandsInit.h \
+    ../rpcCommands/qtkRtpCommand_Test.h \    
     pca9685events.h
 
 

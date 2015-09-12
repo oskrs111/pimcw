@@ -25,7 +25,7 @@ inline qtkRtpCommand_Test::qtkRtpCommand_Test(QtkJsRpcServer *parent)
 
 inline void qtkRtpCommand_Test::CommandInit()
 {
-        this->SetCommandId(k_rtp_command_id::rci_TestCommand);
+    this->SetCommandId(k_rtp_command_id::rci_TestCommand);
 }
 
 inline void qtkRtpCommand_Test::CommandExecute(QJsonObject params, int seqId)
