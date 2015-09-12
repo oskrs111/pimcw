@@ -18,15 +18,20 @@
   <div id="home" data-role="page">
     <div data-role="header" data-position="fixed">
       <h3>Toni Manero Control</h3>
-      <div class="ui-grid-b" style="height:55px">
+      <div class="ui-grid-b" style="height:69px">
           <div class="ui-block-a" style="height:100%">
-          <div id='appIcon' style='width: 32px; height: 32px; background-image: \css\images\toniManero.ico ;'></div>
+          <div id="appIcon" style="width: 64px; height: 64px; background-image: url('/css/images/light41_64.png'); background-repeat: no-repeat; margin: auto;"></div>
           </div>
         <div class="ui-block-b" style="height:100%">
-          <div class="ui-field-contain">
-            <label for="gk-95S2XR" class="ui-hidden-accessible"></label>
-            <input type="checkbox" data-role="flipswitch" id="gk-95S2XR">
-          </div>
+		
+		<div id="appIcon" style="width: 64px; height: 64px; margin: auto;">
+        <select name="flip-1" id="flip-1" data-role="slider">
+	<option value="on">Off</option>
+	<option value="off">On</option>
+</select> 
+		  </div>
+		 
+
         </div>
         <div class="ui-block-c" style="height:100%"></div>
       </div>
@@ -34,33 +39,35 @@
     <div role="main" class="ui-content">
         
       <div data-role="collapsibleset">
-        <div data-role="collapsible" data-collapsed="true">
+        <div data-role="collapsible" data-collapsed="true" id="settingsPannel">
           <h3>Target Settings</h3>
+		  
           <div class="ui-field-contain">
-            <label for="gk-95xBSC">Ip Address</label>
-            <input type="text" name id="gk-95xBSC" placeholder="192.168.XXX.XXX">
+            <label for="targetIp">Ip Address</label>
+            <input type="text" name id="targetIp" placeholder="192.168.XXX.XXX">
           </div>
+		  
           <div class="ui-field-contain">
-            <label for="gk-95ZWsa">Ip Port</label>
-            <input type="number" name id="gk-95ZWsa" value="80">
+            <label for="targetPort">Ip Port</label>
+            <input type="number" name id="targetPort" placeholder="80">
           </div>
+		  
+		    <div class="ui-field-contain">
+            <label for="channelCount">Max Channels</label>
+            <input type="number" name id="channelCount" placeholder="2" max="16">
+          </div>
+		  
         </div>
       </div>
         
       <div data-role="collapsibleset">
-        <div data-role="collapsible" data-collapsed="true">
-          <h3>Channels Settings</h3>
-          
-          <div class="ui-field-contain">
-            <label for="gk-95ycRH">Channel 01</label>
-            <input id="gk-95ycRH" value="50" min="0" max="100" type="range">
-          </div>
-          
-          <div class="ui-field-contain">
-            <label for="gk-957Fqz">Channel 02</label>
-            <input id="gk-957Fqz" value="50" min="0" max="100" type="range">
-          </div>
-          
+        <div data-role="collapsible" data-collapsed="true" id="channelPannel">
+          <h3>Channels Settings</h3>		  
+		  <div id="sliderContainer">
+          <!--Slider place -->
+         
+          <!--Slider place end -->
+		  <div>
         </div>
       </div>
     </div>
@@ -69,3 +76,15 @@
 </body>
 
 </html>
+
+<!--
+ <div class="ui-field-contain">
+            <label for="gk-95ycRH">Channel 11</label>
+            <input id="gk-95ycRH" value="50" min="0" max="100" type="range">
+          </div>
+          
+          <div class="ui-field-contain">
+            <label for="gk-957Fqz">Channel 22</label>
+            <input id="gk-957Fqz" value="50" min="0" max="100" type="range">
+          </div>
+-->
