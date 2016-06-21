@@ -57,12 +57,14 @@ int main(int argc, char *argv[])
 
     qtkVirtualMIDI midi;
     networkThread network(QHostAddress(g_appParameters->loadParam(QString("network"),QString("udpHost"),0)),
-                          g_appParameters->loadParam(QString("network"),QString("udpPort"),0).toInt());
+                          (quint16)g_appParameters->loadParam(QString("network"),QString("udpPort"),0).toInt(),
+                          (quint8)g_appParameters->loadParam(QString("network"),QString("statusRepeat"),0).toInt());
 
     switch(midi.getStatus())
     {
         case stReady:
-            QObject::connect(&midi,SIGNAL(midiReceived(midiMessage)),&network, SLOT(OnMidiReceived(midiMessage)));            
+            QObject::connect(&midi,SIGNAL(midiReceived(midiMessage)),&network, SLOT(OnMidiReceived(midiMessage)));
+            network.start();
             qDebug() << "discoFever is ready to dance!";
             return a.exec();
             break;
@@ -84,5 +86,6 @@ void setDefaultParameters()
     g_appParameters->saveParam(QString("app"),QString("fileLog"),QString("0"));
     g_appParameters->saveParam(QString("network"),QString("udpHost"),QString("192.168.0.100"));
     g_appParameters->saveParam(QString("network"),QString("udpPort"),QString("12340"));    
+    g_appParameters->saveParam(QString("network"),QString("statusRepeat"),QString("3"));
     g_appParameters->fileSave();
 }
