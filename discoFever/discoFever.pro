@@ -17,18 +17,21 @@ TEMPLATE = app
 DEFINES += VEJAM_NO_GUI
 
 SOURCES += main.cpp \
-    ../qtkApplicationParameters/qtkapplicationparameters.cpp \
-    ../qtkVirtualMIDI/qtkvirtualmidi.cpp \
+    ../../qtkApplicationParameters/qtkapplicationparameters.cpp \
+    ../../qtkVirtualMIDI/qtkvirtualmidi.cpp \
     networkthread.cpp
 
+
 HEADERS += main.h \
-        teVirtualMIDI.h \
-    ../qtkApplicationParameters/qtkapplicationparameters.h \
-    ../qtkVirtualMIDI/qtkvirtualmidi.h \
+    ../../qtkApplicationParameters/qtkapplicationparameters.h \
+    ../../qtkVirtualMIDI/qtkvirtualmidi.h \
     networkthread.h \
     ../qtkVirtualMIDI/qtkvirtualmidistructs.h
 
-INCLUDEPATH += "../teVirtualMIDISDK_1_1_2_25/C" \
-            "../qtkApplicationParameters"
+INCLUDEPATH += "../../qtkApplicationParameters"
 
-LIBS += -L"../teVirtualMIDISDK_1_1_2_25/C" -lteVirtualMIDI32
+#--Tobias Erichsen\teVirtualMIDISDK--
+HEADERS += "C:\Program Files (x86)\Tobias Erichsen\teVirtualMIDISDK\C-Binding\teVirtualMIDI.h"
+INCLUDEPATH += "C:/Program Files (x86)/Tobias Erichsen/teVirtualMIDISDK/C-Binding"
+LIBS += -L"C:/Program Files (x86)/Tobias Erichsen/teVirtualMIDISDK/C-Binding" -lteVirtualMIDI32
+
