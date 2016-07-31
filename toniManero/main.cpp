@@ -65,7 +65,7 @@ int main(int argc, char *argv[])
 
     QtkHttpServer server((quint16)g_appParameters->loadParam(QString("network"),QString("httpPort"),0).toInt(), &a);
 
-    qDebug() << "toniManero (0.1) is dancing now!";
+    qDebug() << "toniManero (0.2) is dancing now!";
 
     //while(1)
     //{
