@@ -1,0 +1,219 @@
+* {
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    -webkit-user-select: none;
+    /* Chrome/Safari/Opera */
+    -khtml-user-select: none;
+    /* Konqueror */
+    -moz-user-select: none;
+    /* Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    user-select: none;
+    /* Non-prefixed version, currently
+                                  not supported by any browser */
+}
+
+div {
+    margin: 0;
+    padding: 0;
+    border: none;
+    display: inline-block;
+}
+
+.header {
+    margin-top: 6rem;
+    text-align: center;
+}
+
+.navbar {
+    top: 0px;
+    left: 0px;
+    position: relative;
+    background-color: #3366ff;
+    color: whitesmoke;
+    height: 5rem;
+    width: 100%;
+    font-weight: bold;
+}
+
+a {
+    text-decoration: none;
+    color: whitesmoke;
+}
+
+.navbar-list {
+    list-style: none;
+}
+
+.navbar-menu {
+    width: 40vw;
+}
+
+.navbar-title {
+    width: 40vw;
+    text-align: right;
+    float: right;
+    margin: 1.5rem 2rem 0 0;
+}
+
+.navbar-item {
+    width: 10rem;
+    height: 5rem;
+    display: inline-block;
+    background-color: #3366ff;
+    text-align: center;
+    position: relative;
+    top: 0px;
+    padding-top: 1rem;
+}
+
+.navbar-item:hover {
+    -webkit-transition: top 350ms ease-out 50ms;
+    -moz-transition: top 350ms ease-out 50ms;
+    transition: top 350ms ease-out 50ms;
+    -webkit-transition: height 150ms ease-out;
+    -moz-transition: height 150ms ease-out;
+    transition: height 150ms ease-out;
+    height: 5.5rem;
+    top: 0.5rem;
+    cursor: pointer;
+}
+
+.button-pannel {
+    border: 1px solid whitesmoke;
+    width: 100%;
+    padding: 1px;
+    margin: auto;
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.button-frame {
+    border: 2px dashed #3366ff;
+    width: 37vw;
+    height: 37vw;
+    margin: 1vw;
+    background: #ffffff;
+    color: #3366ff;
+    vertical-align: top;
+    font-size: 3vw;
+    -webkit-transition: background 350ms ease-out 250ms;
+    -moz-transition: background 350ms ease-out 250ms;
+    transition: background 350ms ease-out 250ms;
+}
+
+.button-frame-OFF {
+    background-color: lightgray;
+    background-image: repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255, 255, 255, .5) 35px, rgba(255, 255, 255, .5) 70px);
+    -webkit-transition: background 350ms ease-out 250ms;
+    -moz-transition: background 350ms ease-out 250ms;
+    transition: background 350ms ease-out 250ms;
+    color: #404040;
+    border: 2px dashed #404040;
+}
+
+.button-frame:hover {
+    border: 2px solid #3366ff;
+}
+
+.button-svg {
+    width: calc(37vw - 4px);
+    height: calc(37vw - 4px);
+    border: 1px solid transparent;
+    background: transparent;
+    position: relative;
+    top: -59.5vw;
+    stroke: #3366ff;
+    z-index: 1;
+}
+
+.button-svg-OFF {
+    stroke: #404040;
+}
+
+.button-path-text {
+    font-size: 4vw;
+    text-anchor: middle;
+    fill: #3366ff;
+}
+
+.button-path-text-OFF {
+    fill: #404040;
+}
+
+.button-path-arc {
+    fill: none;
+    stroke-width: 2.3vw;
+}
+
+.button-layout {
+    border: 1px solid transparent;
+    padding: 2px;
+    position: relative;
+    z-index: 10;
+    cursor: pointer;
+}
+
+.layout-center {
+    border: 1px solid transparent;
+    position: relative;
+    width: calc(23vw - 4px);
+    height: calc(23vw - 4px);
+    border-radius: 9vw;
+    top: -28.5vw;
+}
+
+.button-layout p {
+    display: inline-block;
+}
+
+.function-increase:hover {
+    font-weight: bold;
+}
+
+.function-decrease:hover {
+    font-weight: bold;
+}
+
+.layout-a {
+    width: 21vw;
+    height: 18vw;
+    vertical-align: top;
+    text-align: left;
+}
+
+.layout-b {
+    width: 13vw;
+    height: 18vw;
+    vertical-align: top;
+    text-align: right;
+}
+
+.layout-c {
+    width: 13vw;
+    height: 18vw;
+    vertical-align: bottom;
+    text-align: left;
+}
+
+.layout-c p {
+    left: 0;
+    bottom: 0;
+    position: absolute;
+    margin: 0;
+}
+
+.layout-d p {
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    margin: 0;
+}
+
+.layout-d {
+    width: 21vw;
+    height: 18vw;
+    vertical-align: bottom;
+    text-align: right;
+}

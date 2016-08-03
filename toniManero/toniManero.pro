@@ -43,7 +43,8 @@ SOURCES += main.cpp \
     ../qtkApplicationParameters/qtkapplicationparameters.cpp \
     ../qtkHttpServer/qtkHttpServer.cpp \
     ../qtkHttpServer/qtkJsRpcServer.cpp \
-    ../qtkHttpServer/qtkRtpCommand_.cpp
+    ../qtkHttpServer/qtkRtpCommand_.cpp \
+    tonimanerodevice.cpp
 
 
 HEADERS += main.h \        
@@ -61,7 +62,8 @@ HEADERS += main.h \
     ../rpcCommands/qtkRtpCommand_PwmSet.h \
     ../rpcCommands/qtkRtpCommandsInit.h \
     ../rpcCommands/qtkRtpCommand_Test.h \    
-    pca9685events.h
+    pca9685events.h \
+    tonimanerodevice.h
 
 
 INCLUDEPATH += "../qtkApplicationParameters" \

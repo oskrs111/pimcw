@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, user-scalable=no">
+  <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+  <link href="css/jquery.mobile-1.4.5.css" rel="stylesheet" type="text/css" />
+  <script src="js/jquery-1.11.3.js"></script>
+  <script src="js/jquery.mobile-1.4.5.js"></script>
+  <script src="js/app.js"></script>
+  <!-- Uncomment the following to include cordova in your android project -->
+  <!--<script src="http://jqmdesigner.appspot.com/platforms/android/cordova.js"></script>-->
+  <title>EZo App</title>
+</head>
+
+<body>
+    <div style="max-width: 348px;">
+  <div id="home" data-role="page">
+    <div data-role="header" data-position="fixed">
+      <h3>Toni Manero Control</h3>
+      <div class="ui-grid-b" style="height:69px">
+          <div class="ui-block-a" style="height:100%">
+          <div id="appIcon" style="width: 64px; height: 64px; background-image: url('/css/images/light41_64.png'); background-repeat: no-repeat; margin: auto;"></div>
+          </div>
+        <div class="ui-block-b" style="height:100%">
+		
+		<div id="appIcon" style="width: 64px; height: 64px; margin: auto;">
+        <select name="flip-1" id="flip-1" data-role="slider">
+	<option value="on">Off</option>
+	<option value="off">On</option>
+</select> 
+		  </div>
+		 
+
+        </div>
+        <div class="ui-block-c" style="height:100%"></div>
+      </div>
+    </div>
+    <div role="main" class="ui-content">
+        
+      <div data-role="collapsibleset">
+        <div data-role="collapsible" data-collapsed="true" id="settingsPannel">
+          <h3>Target Settings</h3>
+		  
+          <div class="ui-field-contain">
+            <label for="targetIp">Ip Address</label>
+            <input type="text" name id="targetIp" placeholder="192.168.XXX.XXX">
+          </div>
+		  
+          <div class="ui-field-contain">
+            <label for="targetPort">Ip Port</label>
+            <input type="number" name id="targetPort" placeholder="80">
+          </div>
+		  
+		    <div class="ui-field-contain">
+            <label for="channelCount">Max Channels</label>
+            <input type="number" name id="channelCount" placeholder="2" max="16">
+          </div>
+		  
+        </div>
+      </div>
+        
+      <div data-role="collapsibleset">
+        <div data-role="collapsible" data-collapsed="true" id="channelPannel">
+          <h3>Channels Settings</h3>		  
+		  <div id="sliderContainer">
+          <!--Slider place -->
+         
+          <!--Slider place end -->
+		  <div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+
+</html>
+
+<!--
+ <div class="ui-field-contain">
+            <label for="gk-95ycRH">Channel 11</label>
+            <input id="gk-95ycRH" value="50" min="0" max="100" type="range">
+          </div>
+          
+          <div class="ui-field-contain">
+            <label for="gk-957Fqz">Channel 22</label>
+            <input id="gk-957Fqz" value="50" min="0" max="100" type="range">
+          </div>
+-->

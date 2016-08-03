@@ -1,107 +1,168 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, user-scalable=no">
-  <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
-<link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
-<link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
-<link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
-<link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
-<link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
-<link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
-<link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
-<link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="manifest" href="/manifest.json">
-<meta name="msapplication-TileColor" content="#ffffff">
-<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
-<meta name="theme-color" content="#ffffff">
-  <link href="css/jquery.mobile-1.4.5.css" rel="stylesheet" type="text/css" />
-  <script src="js/jquery-1.11.3.js"></script>
-  <script src="js/jquery.mobile-1.4.5.js"></script>
-  <script src="js/app.js"></script>
-  <!-- Uncomment the following to include cordova in your android project -->
-  <!--<script src="http://jqmdesigner.appspot.com/platforms/android/cordova.js"></script>-->
-  <title>EZo App</title>
+
+    <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta charset="utf-8">
+    <title>toniManero Control</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– 
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+  -->
+    <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/skeleton.css">
+    <link rel="stylesheet" href="css/custom.css">
+
+    <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="icon" type="image/png" href="images/favicon.png">
+
+    <script src="js/jquery-3.1.0.min.js"></script>
+    <script src="js/appData.js"></script>
+    <script src="js/app.js"></script>
+
+    <script>
+    </script>
+
 </head>
 
 <body>
-    <div style="max-width: 348px;">
-  <div id="home" data-role="page">
-    <div data-role="header" data-position="fixed">
-      <h3>Toni Manero Control</h3>
-      <div class="ui-grid-b" style="height:69px">
-          <div class="ui-block-a" style="height:100%">
-          <div id="appIcon" style="width: 64px; height: 64px; background-image: url('/css/images/light41_64.png'); background-repeat: no-repeat; margin: auto;"></div>
-          </div>
-        <div class="ui-block-b" style="height:100%">
-		
-		<div id="appIcon" style="width: 64px; height: 64px; margin: auto;">
-        <select name="flip-1" id="flip-1" data-role="slider">
-	<option value="on">Off</option>
-	<option value="off">On</option>
-</select> 
-		  </div>
-		 
 
+    <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <nav class="navbar">
+        <div class="navbar-menu">
+            <ul class="navbar-list">
+                <li class="navbar-item"><a class="navbar-link" href="#menu">MENU</a></li>
+                <!--        
+                <li class="navbar-item"><a class="navbar-link" href="#menu">MENU</a></li>
+                <li class="navbar-item"><a class="navbar-link" href="#menu">MENU</a></li>
+                <li class="navbar-item"><a class="navbar-link" href="#menu">MENU</a></li>
+                -->
+            </ul>
         </div>
-        <div class="ui-block-c" style="height:100%"></div>
-      </div>
+        <div class="navbar-title">
+            toniManero Control
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="button-pannel">
+                <div id="tChannel0" class="button-frame" tChnannelId='0' tChannelValue='100' tChannelBackupValue='0'>
+                    <div class="button-layout layout-a function-toggle" tChnannelId='0'>
+                        <p tChnannelId='0'>Channel 0</p>
+                    </div>
+                    <div class="button-layout layout-b function-increase" tChnannelId='0'>
+                        <p tChnannelId='0'>[+]</p>
+                    </div>
+                    <div class="button-layout layout-c function-decrease" tChnannelId='0'>
+                        <p tChnannelId='0'>[-]</p>
+                    </div>
+                    <div class="button-layout layout-d function-toggle" tChnannelId='0'>
+                        <p tChnannelId='0'>OFF</p>
+                    </div>
+
+                    <div class="button-layout layout-center function-toggle" tChnannelId='0'>
+                    </div>
+
+                    <svg id="tSvg0" class="button-svg">
+                    <path id="tArc0" class="button-path-arc"/>
+                    <text id="tText0" name="tText0" class="button-path-text" x="0" y="0">%</text>                      
+                    </svg>
+
+                </div>
+
+                <div id="tChannel1" class="button-frame" tChnannelId='1' tChannelValue='100' tChannelBackupValue='0'>
+                    <div class="button-layout layout-a function-toggle" tChnannelId='1'>
+                        <p tChnannelId='1'>Channel 1</p>
+                    </div>
+                    <div class="button-layout layout-b function-increase" tChnannelId='1'>
+                        <p tChnannelId='1'>[+]</p>
+                    </div>
+                    <div class="button-layout layout-c function-decrease" tChnannelId='1'>
+                        <p tChnannelId='1'>[-]</p>
+                    </div>
+                    <div class="button-layout layout-d function-toggle" tChnannelId='1'>
+                        <p tChnannelId='1'>OFF</p>
+                    </div>
+
+                    <div class="button-layout layout-center function-toggle" tChnannelId='1'>
+                    </div>
+
+                    <svg id="tSvg1" class="button-svg">
+                    <path id="tArc1" class="button-path-arc"/>
+                    <text id="tText1" name="tText0" class="button-path-text" x="0" y="0">%</text>                      
+                    </svg>
+
+                </div>
+
+                <div id="tChannel2" class="button-frame" tChnannelId='2' tChannelValue='100' tChannelBackupValue='0'>
+                    <div class="button-layout layout-a function-toggle" tChnannelId='2'>
+                        <p tChnannelId='2'>Channel 2</p>
+                    </div>
+                    <div class="button-layout layout-b function-increase" tChnannelId='2'>
+                        <p tChnannelId='2'>[+]</p>
+                    </div>
+                    <div class="button-layout layout-c function-decrease" tChnannelId='2'>
+                        <p tChnannelId='2'>[-]</p>
+                    </div>
+                    <div class="button-layout layout-d function-toggle" tChnannelId='2'>
+                        <p tChnannelId='2'>OFF</p>
+                    </div>
+
+                    <div class="button-layout layout-center function-toggle" tChnannelId='2'>
+                    </div>
+
+                    <svg id="tSvg2" class="button-svg">
+                    <path id="tArc2" class="button-path-arc"/>
+                    <text id="tText2" name="tText0" class="button-path-text" x="0" y="0">%</text>                      
+                    </svg>
+
+                </div>
+
+                <div id="tChannel3" class="button-frame" tChnannelId='3' tChannelValue='100' tChannelBackupValue='0'>
+                    <div class="button-layout layout-a function-toggle" tChnannelId='3'>
+                        <p tChnannelId='3'>Channel 3</p>
+                    </div>
+                    <div class="button-layout layout-b function-increase" tChnannelId='3'>
+                        <p tChnannelId='3'>[+]</p>
+                    </div>
+                    <div class="button-layout layout-c function-decrease" tChnannelId='3'>
+                        <p tChnannelId='3'>[-]</p>
+                    </div>
+                    <div class="button-layout layout-d function-toggle" tChnannelId='3'>
+                        <p tChnannelId='3'>OFF</p>
+                    </div>
+
+                    <div class="button-layout layout-center function-toggle" tChnannelId='3'>
+                    </div>
+
+                    <svg id="tSvg3" class="button-svg">
+                    <path id="tArc3" class="button-path-arc"/>
+                    <text id="tText3" name="tText0" class="button-path-text" x="0" y="0">%</text>                      
+                    </svg>
+
+                </div>
+
+
+            </div>
+        </div>
     </div>
-    <div role="main" class="ui-content">
-        
-      <div data-role="collapsibleset">
-        <div data-role="collapsible" data-collapsed="true" id="settingsPannel">
-          <h3>Target Settings</h3>
-		  
-          <div class="ui-field-contain">
-            <label for="targetIp">Ip Address</label>
-            <input type="text" name id="targetIp" placeholder="192.168.XXX.XXX">
-          </div>
-		  
-          <div class="ui-field-contain">
-            <label for="targetPort">Ip Port</label>
-            <input type="number" name id="targetPort" placeholder="80">
-          </div>
-		  
-		    <div class="ui-field-contain">
-            <label for="channelCount">Max Channels</label>
-            <input type="number" name id="channelCount" placeholder="2" max="16">
-          </div>
-		  
-        </div>
-      </div>
-        
-      <div data-role="collapsibleset">
-        <div data-role="collapsible" data-collapsed="true" id="channelPannel">
-          <h3>Channels Settings</h3>		  
-		  <div id="sliderContainer">
-          <!--Slider place -->
-         
-          <!--Slider place end -->
-		  <div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+
+    <!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 </body>
 
 </html>
-
-<!--
- <div class="ui-field-contain">
-            <label for="gk-95ycRH">Channel 11</label>
-            <input id="gk-95ycRH" value="50" min="0" max="100" type="range">
-          </div>
-          
-          <div class="ui-field-contain">
-            <label for="gk-957Fqz">Channel 22</label>
-            <input id="gk-957Fqz" value="50" min="0" max="100" type="range">
-          </div>
--->

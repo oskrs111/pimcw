@@ -20,6 +20,7 @@ extern "C"
 #endif
 
 #define PCA9685_INTERFACE_SERVICE_NAME "PWM_SERVICE"
+//#define PCA9685_INTERFACE_SERVICE_NAME "PCA9685_SERVICE"
 
 pca9685Interface::pca9685Interface(quint16 udpPort, quint8 i2cBus, quint8 i2cAddr, quint8 noteOffset, QObject *parent) : QObject(parent)
 {
@@ -115,7 +116,7 @@ int pca9685Interface::pwmInit()
     this->i2cByteWrite(LED_ALL_ON_H, 0x00);
     this->i2cByteWrite(LED_ALL_OFF_L, 0xFF);
     this->i2cByteWrite(LED_ALL_OFF_H, 0x0F);
-    QThread::msleep(500);
+    QThread::msleep(250);
 
     this->i2cByteWrite(LED_ALL_ON_L, 0x00);
     this->i2cByteWrite(LED_ALL_ON_H, 0x00);
