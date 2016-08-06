@@ -171,8 +171,8 @@ void pca9685Interface::event2pwm(unsigned char channel, unsigned char dutty)
 
     //this->i2cByteWrite(LED0_ON_L + chanOffset, 0x00);
     //this->i2cByteWrite(LED0_ON_H + chanOffset, 0x00);
-    this->i2cByteWrite(LED0_OFF_L + channel, chanDutyL);
-    this->i2cByteWrite(LED0_OFF_H + channel, chanDutyH);
+    this->i2cByteWrite(LED0_OFF_L + (channel * 4), chanDutyL);
+    this->i2cByteWrite(LED0_OFF_H + (channel * 4), chanDutyH);
 
 }
 
