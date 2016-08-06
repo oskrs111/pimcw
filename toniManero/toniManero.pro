@@ -39,35 +39,29 @@ RC_ICONS += toniManero.ico
 
 SOURCES += main.cpp \    
     pca9685interface.cpp \
-    networkthread.cpp \
-    ../qtkApplicationParameters/qtkapplicationparameters.cpp \
-    ../qtkHttpServer/qtkHttpServer.cpp \
-    ../qtkHttpServer/qtkJsRpcServer.cpp \
-    ../qtkHttpServer/qtkRtpCommand_.cpp \
-    tonimanerodevice.cpp
-
+    ../../qtkApplicationParameters/qtkapplicationparameters.cpp \
+    ../../qtkHttpServer/qtkHttpServer.cpp \
+    ../../qtkHttpServer/qtkJsRpcServer.cpp \
+    ../../qtkHttpServer/qtkRtpCommand_.cpp
 
 HEADERS += main.h \        
     pca9685interface.h \
-    networkthread.h \
-    ../qtkApplicationParameters/qtkapplicationparameters.h \        
-    ../qtkVirtualMIDI/qtkvirtualmidistructs.h \    
-    ../qtkHttpServer/qtkHttpCommon.h \
-    ../qtkHttpServer/qtkHttpServer.h \
-    ../qtkHttpServer/qtkJsRpcServer.h \
-    ../qtkHttpServer/qtkRtpCommand_.h \
+    ../../qtkApplicationParameters/qtkapplicationparameters.h \
+    ../../qtkVirtualMIDI/qtkvirtualmidistructs.h \
+    ../../qtkHttpServer/qtkHttpCommon.h \
+    ../../qtkHttpServer/qtkHttpServer.h \
+    ../../qtkHttpServer/qtkJsRpcServer.h \
+    ../../qtkHttpServer/qtkRtpCommand_.h \
     ../config/qtkHttpServerConfig.h \
     ../rpcCommands/qtkRtpCommand_headers.h \
     ../rpcCommands/qtkRtpCommand_id.h \
     ../rpcCommands/qtkRtpCommand_PwmSet.h \
     ../rpcCommands/qtkRtpCommandsInit.h \
     ../rpcCommands/qtkRtpCommand_Test.h \    
-    pca9685events.h \
-    tonimanerodevice.h
+    pca9685events.h
 
-
-INCLUDEPATH += "../qtkApplicationParameters" \
-               "../qtkHttpServer" \
+INCLUDEPATH += "../../qtkApplicationParameters" \
+               "../../qtkHttpServer" \
                "../config" \
                "../rpcCommands"
 
