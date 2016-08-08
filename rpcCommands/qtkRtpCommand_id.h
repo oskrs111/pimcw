@@ -10,7 +10,9 @@ namespace k_rtp_command_id
 	enum 
 	{		
         rci_TestCommand = RCI_BASE,
-		rci_PwmSetCommand,
+        rci_PwmSetCommand,
+        rci_pca9685SetCommand,
+        rci_pca9685GetCommand,
 		rci_Last	
 	};
 
@@ -24,7 +26,9 @@ struct rtpCommandStruct
 static struct rtpCommandStruct rtpCommands [] =
 {
 {"test", rci_TestCommand},
-{"pwmSet", rci_PwmSetCommand}
+{"pwmSet", rci_PwmSetCommand},
+{"pca9685Set", rci_pca9685SetCommand},
+{"pca9685Get", rci_pca9685GetCommand}
 };
 
 

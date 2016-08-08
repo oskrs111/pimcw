@@ -18,6 +18,7 @@
 #define LED_ALL_ON_H  0xFB
 #define LED_ALL_OFF_L  0xFC
 #define LED_ALL_OFF_H  0xFD
+#define MAX_CHANNELS 16
 
 class pca9685Interface : public QObject
 {
@@ -26,6 +27,8 @@ public:
     explicit pca9685Interface(quint16 udpPort, quint8 i2cBus, quint8 i2cAddr, quint8 noteOffset, QObject *parent = 0);
     ~pca9685Interface();
      void socketPoll();
+     void setChannelDutty(quint8 channel, quint8 dutty);
+     quint8 getChannelDutty(quint8 channel);
 
 private:
     void networkInit();
@@ -43,6 +46,7 @@ private:
     quint8 m_i2cBus;
     quint8 m_i2cAddr;
     quint8 m_noteOffset;
+    quint8 a_duttyValues[MAX_CHANNELS];
     int m_i2cHandler;
     QUdpSocket* p_socket;
 

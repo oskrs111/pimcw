@@ -19,8 +19,8 @@ extern "C"
 }
 #endif
 
-#define PCA9685_INTERFACE_SERVICE_NAME "PWM_SERVICE"
-//#define PCA9685_INTERFACE_SERVICE_NAME "PCA9685_SERVICE"
+//#define PCA9685_INTERFACE_SERVICE_NAME "PWM_SERVICE"
+#define PCA9685_INTERFACE_SERVICE_NAME "PCA9685_SERVICE"
 
 pca9685Interface::pca9685Interface(quint16 udpPort, quint8 i2cBus, quint8 i2cAddr, quint8 noteOffset, QObject *parent) : QObject(parent)
 {
@@ -29,6 +29,7 @@ pca9685Interface::pca9685Interface(quint16 udpPort, quint8 i2cBus, quint8 i2cAdd
     this->m_i2cAddr = i2cAddr;
     this->m_noteOffset = noteOffset;
     this->m_i2cHandler = 0;
+    memset(&this->a_duttyValues[0], 0x00, sizeof(this->a_duttyValues));
 
     this->setObjectName(QString(PCA9685_INTERFACE_SERVICE_NAME));
 
@@ -173,6 +174,20 @@ void pca9685Interface::event2pwm(unsigned char channel, unsigned char dutty)
     //this->i2cByteWrite(LED0_ON_H + chanOffset, 0x00);
     this->i2cByteWrite(LED0_OFF_L + (channel * 4), chanDutyL);
     this->i2cByteWrite(LED0_OFF_H + (channel * 4), chanDutyH);
+
+}
+
+void pca9685Interface::setChannelDutty(quint8 channel, quint8 dutty)
+{
+    if(channel >= MAX_CHANNELS) return; //Error.
+    this->event2pwm(channel, dutty);
+    this->a_duttyValues[channel] = dutty;
+}
+
+quint8 pca9685Interface::getChannelDutty(quint8 channel)
+{
+    if(channel >= MAX_CHANNELS) return 0xFF; //Error.
+    return this->a_duttyValues[channel];
 
 }
 

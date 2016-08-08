@@ -1,40 +1,39 @@
-#ifndef QTKRTPCOMMAND_PWMSET__H
-#define QTKRTPCOMMAND_PWMSET__H
+#ifndef QTKRTPCOMMAND_PCA9685SET__H
+#define QTKRTPCOMMAND_PCA9685SET__H
 #include <QObject>
 #include <QCoreApplication>
 #include "qtkRtpCommand_id.h"
 #include "qtkRtpCommand_.h"
-#include "pca9685events.h"
+#include "pca9685interface.h"
 
-//{"jsonrpc": "2.0", "method": "pwmSet", "params": {"channel": 23, "dutty": 42}, "id": 4}
-class qtkRtpCommand_PwmSet : public qtkRtpCommand_
+//{"jsonrpc": "2.0", "method": "pca9685Set", "params": {"channel": 23, "dutty": 42}, "id": 4}
+class qtkRtpCommand_pca9685Set : public qtkRtpCommand_
 {
     Q_OBJECT
 public:
-    explicit qtkRtpCommand_PwmSet(QtkJsRpcServer *parent = 0);
+    explicit qtkRtpCommand_pca9685Set(QtkJsRpcServer *parent = 0);
 
 private:
     void CommandInit();
     void CommandExecute(QJsonObject params, int seqId);
 };
 
-inline qtkRtpCommand_PwmSet::qtkRtpCommand_PwmSet(QtkJsRpcServer *parent)
+inline qtkRtpCommand_pca9685Set::qtkRtpCommand_pca9685Set(QtkJsRpcServer *parent)
         : qtkRtpCommand_(parent)
 {
 	this->CommandInit();
 }
 
-inline void qtkRtpCommand_PwmSet::CommandInit()
+inline void qtkRtpCommand_pca9685Set::CommandInit()
 {
-        this->SetCommandId(k_rtp_command_id::rci_PwmSetCommand);
+        this->SetCommandId(k_rtp_command_id::rci_pca9685SetCommand);
 }
 
-inline void qtkRtpCommand_PwmSet::CommandExecute(QJsonObject params, int seqId)
+inline void qtkRtpCommand_pca9685Set::CommandExecute(QJsonObject params, int seqId)
 {
     int channel = 0;
-    int dutty = 0;
-    PwmEvent* event = 0;
-    QObject* target = 0;
+    int dutty = 0;    
+    pca9685Interface* target = 0;
     QtkJsRpcServer* parent = 0;
     QString result;
 
@@ -43,11 +42,10 @@ inline void qtkRtpCommand_PwmSet::CommandExecute(QJsonObject params, int seqId)
     if(params.contains("channel") && params.contains("dutty"))
     {
 		channel = params.take("channel").toInt();
-		dutty = params.take("dutty").toInt();
-        event = new PwmEvent(channel, dutty);
+		dutty = params.take("dutty").toInt();        
         parent = (QtkJsRpcServer*)this->parent();
-        target = parent->getEventTarget("PWM_SERVICE");
-        QCoreApplication::postEvent(target, event);
+        target = (pca9685Interface*)parent->getEventTarget("PCA9685_SERVICE");
+        target->setChannelDutty(channel, dutty);
         result = QString("{\"jsonrpc\": \"2.0\", \"result\": \"success\", \"id\": %1}").arg(seqId,0,10);
     }
     else

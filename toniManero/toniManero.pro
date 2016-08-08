@@ -55,10 +55,12 @@ HEADERS += main.h \
     ../config/qtkHttpServerConfig.h \
     ../rpcCommands/qtkRtpCommand_headers.h \
     ../rpcCommands/qtkRtpCommand_id.h \
-    ../rpcCommands/qtkRtpCommand_PwmSet.h \
     ../rpcCommands/qtkRtpCommandsInit.h \
     ../rpcCommands/qtkRtpCommand_Test.h \    
-    pca9685events.h
+    pca9685events.h \
+    ../rpcCommands/qtkRtpCommand_pca9685Set.h \
+    ../rpcCommands/qtkRtpCommand_PwmSet.h \
+    ../rpcCommands/qtkRtpCommand_pca9685Get.h
 
 INCLUDEPATH += "../../qtkApplicationParameters" \
                "../../qtkHttpServer" \
