@@ -45,7 +45,7 @@ inline void qtkRtpCommand_pca9685Get::CommandExecute(QJsonObject params, int seq
         parent = (QtkJsRpcServer*)this->parent();
         target = (pca9685Interface*)parent->getEventTarget("PCA9685_SERVICE");
         dutty = target->getChannelDutty(channel);
-        result = QString("{\"jsonrpc\": \"2.0\", \"result\": %2, \"id\": %1}").arg(seqId,0,10).arg(dutty,0,10);
+        result = QString("{\"jsonrpc\": \"2.0\", \"result\":{\"channel\": %2, \"dutty\": %3},\"id\": %1}").arg(seqId,0,10).arg(channel,0,10).arg(dutty,0,10);
     }
     else
     {

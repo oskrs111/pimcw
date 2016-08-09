@@ -113,6 +113,16 @@ a {
     border: 2px dashed #404040;
 }
 
+.button-frame-UNKNOWN {
+    background-color: lightgray;
+    background-image: url("../images/ajax-loader.gif");
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: background 350ms ease-out 250ms;
+    color: #404040;
+    border: 2px dashed #404040;
+}
+
 .button-frame:hover {
     border: 2px solid #3366ff;
 }

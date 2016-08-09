@@ -191,6 +191,12 @@ quint8 pca9685Interface::getChannelDutty(quint8 channel)
 
 }
 
+quint8* pca9685Interface::getAllChannelDutty(quint8* channelCount)
+{
+    *channelCount = sizeof(this->a_duttyValues);
+    return &this->a_duttyValues[0];
+}
+
 void pca9685Interface::socketPoll()
 {
     static quint8 index = 128; //Do not init to 0x00!!!
@@ -220,10 +226,10 @@ void pca9685Interface::socketPoll()
             t += sizeof(struct midiMessage);
             p += sizeof(struct midiMessage);
 
-            if(((message.m_status == MM_NOTE_ON) || (message.m_status == MM_NOTE_OFF)) && (index != message.align__))
+            if(((message.m_status == MM_NOTE_ON) || (message.m_status == MM_NOTE_OFF)) && (index != message.m_index))
             {
                 this->midi2pwm(&message);
-                index = message.align__;
+                index = message.m_index;
                 qDebug() << this->midiMessageToStr(&message);
             }            
         }

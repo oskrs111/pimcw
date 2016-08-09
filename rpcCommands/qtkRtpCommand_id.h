@@ -13,6 +13,7 @@ namespace k_rtp_command_id
         rci_PwmSetCommand,
         rci_pca9685SetCommand,
         rci_pca9685GetCommand,
+        rci_pca9685GetAllCommand,
 		rci_Last	
 	};
 
@@ -28,7 +29,8 @@ static struct rtpCommandStruct rtpCommands [] =
 {"test", rci_TestCommand},
 {"pwmSet", rci_PwmSetCommand},
 {"pca9685Set", rci_pca9685SetCommand},
-{"pca9685Get", rci_pca9685GetCommand}
+{"pca9685Get", rci_pca9685GetCommand},
+{"pca9685GetAll", rci_pca9685GetAllCommand}
 };
 
 

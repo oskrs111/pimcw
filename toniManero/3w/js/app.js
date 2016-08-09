@@ -32,7 +32,7 @@ $(document).ready(function() {
         updateButton(index + '');
     });
 
-
+    remoteChannelGetAll(getChannelCallback);
 
 });
 
@@ -89,11 +89,11 @@ function OnToggle(event) {
     var channelId = $(event.target).attr('tChnannelId');
     if (getButtonValue(channelId) === 0) {
         setButtonValue(channelId, getButtonValueBackup(channelId));
-        remoteChannelUpdate(channelId, getButtonValue(channelId));
+        remoteChannelSet(channelId, getButtonValue(channelId));
     } else {
         setButtonValueBackup(channelId, getButtonValue(channelId));
         setButtonValue(channelId, 0);
-        remoteChannelUpdate(channelId, 0);
+        remoteChannelSet(channelId, 0);
     }
     updateButton(channelId);
 }
@@ -126,18 +126,24 @@ function updateButton(channelId) {
     var value = getButtonValue(channelId);
     var root = $('#tChannel' + channelId);
     var text = root.find(".function-toggle p");
-    if (value > 0) {
+    if (value == 255) { //OSLL: Default state, need to get values from device...
+        text[1].innerHTML = "...";
+        root.addClass("button-frame-UNKNOWN");
+    } else if (value > 0) {
         text[1].innerHTML = "ON";
         root.removeClass("button-frame-OFF");
+        root.removeClass("button-frame-UNKNOWN");
         root.find(".button-path-text").removeClass("button-path-text-OFF");
         root.find(".button-svg").removeClass("button-svg-OFF");
+        arcDraw(channelId, value);
     } else {
         text[1].innerHTML = "OFF";
+        root.removeClass("button-frame-UNKNOWN");
         root.addClass("button-frame-OFF");
         root.find(".button-path-text").addClass("button-path-text-OFF");
         root.find(".button-svg").addClass("button-svg-OFF");
+        arcDraw(channelId, value);
     }
-    arcDraw(channelId, value);
 }
 
 function increaseChannelValue(channelId) {
@@ -145,7 +151,7 @@ function increaseChannelValue(channelId) {
     if (value < 100) {
         value++;
         setButtonValue(channelId, value);
-        remoteChannelUpdate(channelId, value);
+        remoteChannelSet(channelId, value);
     }
 }
 
@@ -154,7 +160,7 @@ function decreaseChannelValue(channelId) {
     if (value > 1) {
         value--;
         setButtonValue(channelId, value);
-        remoteChannelUpdate(channelId, value);
+        remoteChannelSet(channelId, value);
     }
 }
 
@@ -219,6 +225,21 @@ function describeArc(x, y, radius, startAngle, endAngle) {
     return d;
 }
 /*----------------------------------------------------------------------------------------------------------------*/
+function getChannelCallback(reply) {
+
+    if (reply.result.hasOwnProperty("duttyArray")) {
+        for(var channelId = 0; channelId < reply.result.duttyArray.length; channelId++)
+        {        
+            setButtonValue(channelId, reply.result.duttyArray[channelId]);
+            updateButton(channelId);
+        }
+    }
+}
+
+function getAllChannelCallback(reply) {
+
+}
+/*----------------------------------------------------------------------------------------------------------------*/
 
 __pwmSetRequest = function(channel, dutty, id)
     //{"jsonrpc": "2.0", "method": "pwmSet", "params": {"channel": 23, "dutty": 42}, "id": 4}
@@ -232,13 +253,45 @@ __pwmSetRequest = function(channel, dutty, id)
         this.params.dutty = dutty;
     }
 
+__pca9685SetRequest = function(channel, dutty, id)
+    //{"jsonrpc": "2.0", "method": "pca9685Set", "params": {"channel": 23, "dutty": 42}, "id": 4}
+    {
+        this.jsonrpc = "2.0";
+        this.method = "pca9685Set";
+        this.params = { "channel": 0, "dutty": 0 };
+        this.id = id;
+        this.params.channel = channel;
+        this.params.dutty = dutty;
+    }
+
+__pca9685GetRequest = function(channel, dutty, id)
+    //{"jsonrpc": "2.0", "method": "pca9685Get", "params": {"channel": 23}, "id": 4}
+    {
+        this.jsonrpc = "2.0";
+        this.method = "pca9685Get";
+        this.params = { "channel": 0, "dutty": 0 };
+        this.id = id;
+
+        this.params.channel = channel;
+        this.params.dutty = dutty;
+    }
+
+__pca9685GetAllRequest = function(id)
+    //{"jsonrpc": "2.0", "method": "pca9685GetAll", "id": 4}
+    {
+        this.jsonrpc = "2.0";
+        this.method = "pca9685GetAll";
+        this.id = id;
+    }
+
 var gRpcId = 0;
 
-function remoteChannelUpdate(channel, value) {
+function remoteChannelSet(channel, value) {
     if (typeof channel === 'string') channel = parseInt(channel);
     if (typeof value === 'string') value = parseInt(value);
 
-    var rpcRequest = new __pwmSetRequest(channel, value, gRpcId++);
+    //var rpcRequest = new __pwmSetRequest(channel, value, gRpcId++);
+    var rpcRequest = new __pca9685SetRequest(channel, value, gRpcId++);
     rpcRequest = JSON.stringify(rpcRequest);
 
     $.ajax({
@@ -274,6 +327,91 @@ function remoteChannelUpdate(channel, value) {
         }
     });
 }
+
+function remoteChannelGet(channel, value, callback) {
+    if (typeof channel === 'string') channel = parseInt(channel);
+    if (typeof value === 'string') value = parseInt(value);
+
+    var rpcRequest = new __pca9685GetRequest(channel, value, gRpcId++);
+    rpcRequest = JSON.stringify(rpcRequest);
+
+    $.ajax({
+        // la URL para la petición
+        url: gRpcUrl,
+
+        // la información a enviar
+        // (también es posible utilizar una cadena de datos)
+        data: rpcRequest,
+
+        // especifica si será una petición POST o GET
+        type: 'POST',
+
+        // el tipo de información que se espera de respuesta
+        dataType: 'json',
+
+        // código a ejecutar si la petición es satisfactoria;
+        // la respuesta es pasada como argumento a la función
+        success: function(json) {
+            callback(json);
+            console.log('ajax success');
+        },
+
+        // código a ejecutar si la petición falla;
+        // son pasados como argumentos a la función
+        // el objeto de la petición en crudo y código de estatus de la petición
+        error: function(xhr, status) {
+            console.log('ajax error: ' + status);
+        },
+
+        // código a ejecutar sin importar si la petición falló o no
+        complete: function(xhr, status) {
+            console.log('ajax complete');
+        }
+    });
+}
+
+function remoteChannelGetAll(callback) {
+    if (typeof channel === 'string') channel = parseInt(channel);
+    if (typeof value === 'string') value = parseInt(value);
+
+    var rpcRequest = new __pca9685GetAllRequest(gRpcId++);
+    rpcRequest = JSON.stringify(rpcRequest);
+
+    $.ajax({
+        // la URL para la petición
+        url: gRpcUrl,
+
+        // la información a enviar
+        // (también es posible utilizar una cadena de datos)
+        data: rpcRequest,
+
+        // especifica si será una petición POST o GET
+        type: 'POST',
+
+        // el tipo de información que se espera de respuesta
+        dataType: 'json',
+
+        // código a ejecutar si la petición es satisfactoria;
+        // la respuesta es pasada como argumento a la función
+        success: function(json) {
+            callback(json);
+            console.log('ajax success');
+        },
+
+        // código a ejecutar si la petición falla;
+        // son pasados como argumentos a la función
+        // el objeto de la petición en crudo y código de estatus de la petición
+        error: function(xhr, status) {
+            console.log('ajax error: ' + status);
+        },
+
+        // código a ejecutar sin importar si la petición falló o no
+        complete: function(xhr, status) {
+            console.log('ajax complete');
+        }
+    });
+}
+
 
 function guiBuild() {
     var html = "";

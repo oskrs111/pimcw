@@ -6,4 +6,5 @@
 #include "qtkRtpCommand_PwmSet.h"
 #include "qtkRtpCommand_pca9685Set.h"
 #include "qtkRtpCommand_pca9685Get.h"
+#include "qtkRtpCommand_pca9685GetAll.h"
 #endif 

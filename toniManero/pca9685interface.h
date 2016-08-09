@@ -25,13 +25,14 @@ class pca9685Interface : public QObject
     Q_OBJECT
 public:
     explicit pca9685Interface(quint16 udpPort, quint8 i2cBus, quint8 i2cAddr, quint8 noteOffset, QObject *parent = 0);
-    ~pca9685Interface();
-     void socketPoll();
+    ~pca9685Interface();     
      void setChannelDutty(quint8 channel, quint8 dutty);
      quint8 getChannelDutty(quint8 channel);
+     quint8* getAllChannelDutty(quint8* channelCount);
 
 private:
     void networkInit();
+    void socketPoll();
     int i2cInit();
     int pwmInit();
 

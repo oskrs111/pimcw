@@ -60,7 +60,8 @@ HEADERS += main.h \
     pca9685events.h \
     ../rpcCommands/qtkRtpCommand_pca9685Set.h \
     ../rpcCommands/qtkRtpCommand_PwmSet.h \
-    ../rpcCommands/qtkRtpCommand_pca9685Get.h
+    ../rpcCommands/qtkRtpCommand_pca9685Get.h \
+    ../rpcCommands/qtkRtpCommand_pca9685GetAll.h
 
 INCLUDEPATH += "../../qtkApplicationParameters" \
                "../../qtkHttpServer" \
