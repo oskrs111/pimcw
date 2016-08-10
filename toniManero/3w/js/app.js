@@ -32,7 +32,11 @@ $(document).ready(function() {
         updateButton(index + '');
     });
 
+
     remoteChannelGetAll(getChannelCallback);
+    setInterval(function() {
+        remoteChannelGetAll(getChannelCallback);
+    }, 1000);
 
 });
 
@@ -228,8 +232,7 @@ function describeArc(x, y, radius, startAngle, endAngle) {
 function getChannelCallback(reply) {
 
     if (reply.result.hasOwnProperty("duttyArray")) {
-        for(var channelId = 0; channelId < reply.result.duttyArray.length; channelId++)
-        {        
+        for (var channelId = 0; channelId < reply.result.duttyArray.length; channelId++) {
             setButtonValue(channelId, reply.result.duttyArray[channelId]);
             updateButton(channelId);
         }
