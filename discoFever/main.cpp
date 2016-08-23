@@ -6,6 +6,9 @@ void debugLogger(QtMsgType type, const QMessageLogContext &context, const QStrin
 {
     QByteArray localMsg = msg.toLocal8Bit();
     switch (type) {
+
+    default:
+    case QtInfoMsg:
     case QtDebugMsg:
         localMsg.prepend("DEBUG: ");
         fprintf(stderr, "Debug: %s (%s:%u, %s)\n", localMsg.constData(), context.file, context.line, context.function);
@@ -90,7 +93,7 @@ void setDefaultParameters()
     //fileLog->Enables "1" or disables "0" debug log to file.
 
 
-    g_appParameters->saveParam(QString("app"),QString("fileLog"),QString("0"));
+    g_appParameters->saveParam(QString("aplicacion"),QString("fileLog"),QString("0"));
     g_appParameters->saveParam(QString("network"),QString("udpHost"),QString("192.168.0.100"));
     g_appParameters->saveParam(QString("network"),QString("udpPort"),QString("12340"));    
     g_appParameters->saveParam(QString("network"),QString("statusRepeat"),QString("3"));

@@ -47,13 +47,12 @@ void networkThread::run()
 void networkThread::OnMidiReceived(struct midiMessage message)
 {
     static quint8 index = 0;
-    quint8 t = 0;
-    //qDebug() << "OnMidiReceived, message: " << qtkVirtualMIDI::binToStr((unsigned char*)&message, sizeof(message));
-    qDebug() << qtkVirtualMIDI::midiMessageToStr(&message);
+    quint8 t = 0;        
     if((this->m_midiOffIgnore > 0) && (message.m_status == MM_NOTE_OFF)) return;
     if((this->m_midiChannelFilterEnable > 0) && (this->m_midiChannelFilter == message.m_channel)) return;    
-    if((message.m_status == MM_NOTE_ON) || (message.m_status == MM_NOTE_OFF)) message.m_data1 -= this->m_midiNoteOffset;
+    if((message.m_status == MM_NOTE_ON) || (message.m_status == MM_NOTE_OFF)) message.m_data1 += this->m_midiNoteOffset;
 
+    qDebug() << qtkVirtualMIDI::midiMessageToStr(&message);
     if(this->p_socket)
     {
         message.m_index = index;
