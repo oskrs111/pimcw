@@ -1,0 +1,9 @@
+Qty,partname,description,lib
+0,"4N25","DIP6, DC Optocoupler Base Connected, Vce 30V, CTR 20%, Viso 2500V","opto"
+0,"BC547","45V Vce, 0.1A Ic, NPN, Small Signal Transistor, TO-92","transistors"
+0,"CONN_01X02","Connector, single row, 01x02","conn"
+0,"CP","Polarised capacitor","device"
+0,"D","Diode","device"
+0,"Diode_Bridge","Diode bridge","device"
+0,"IRF540N","100V Vds, 33A Id, HEXFET N-Channel MOSFET, TO-220","transistors"
+0,"R","Resistor","device"
