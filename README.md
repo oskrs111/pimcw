@@ -1,6 +1,4 @@
 # pimcw
-pi Meets Craftwork, some fun tools to be used in a hobby enviroment!
-
 -- Remote MIDI and/or WEB PWM LED control for Raspberry Pi --
 
 Up to now this is a hobby project to build a simple application to control some LED using a Raspberry Pi board plus an
